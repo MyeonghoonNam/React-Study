@@ -24,6 +24,8 @@ function App() {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
+          {/* || 연산을 통해 변수 값이 undefined일 경우 대체하는 값을 명시할 수 있다. */}
+          {/* showLink || 'state' */}
           {showLink && (
             <a
               className="App-link"
@@ -36,6 +38,7 @@ function App() {
           )}
 
           <ul>
+            {/* 화살표 함수에서 {}가아닌 ()로 함수를 제어한다. */}
             {
               names.map(item => (
                 <li key={item}>{item}</li>
