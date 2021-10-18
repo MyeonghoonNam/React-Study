@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import Box from './components/Box';
+import CheckBox from './components/CheckBox';
+import useToggle from './hooks/useToggle';
+import useHover from './hooks/useHover';
+import useKeyPress from './hooks/useKeyPress';
 
 function App() {
+  const [state, toggle] = useToggle();
+  const [ref, isHover] = useHover();
+  const keyPressed = useKeyPress('a');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <CheckBox checked={state} onChange={toggle} />
+      <button onClick={toggle}>{state ? 'True' : 'False'}</button>
+
+      {isHover ? 'hover' : 'mouseOut'}
+      <Box ref={ref} />
+      {keyPressed && 'Pressed'}
     </div>
   );
 }
