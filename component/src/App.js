@@ -2,6 +2,7 @@ import './App.css';
 import Logo from './components/Logo';
 import Paragraph from './components/Paragraph';
 import { css } from '@emotion/react';
+import Box from './components/Box';
 
 const style = css`
   color: hotpink;
@@ -18,6 +19,7 @@ function App() {
   return (
     <div className="App">
       <SomeComponent />
+      <Box />
       <header className="App-header">
         <Logo size={300} />
         <Logo />
