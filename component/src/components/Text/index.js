@@ -1,36 +1,29 @@
-import styled from '@emotion/styled';
-import { useState } from 'react';
-
-// const fontStyle = {
-//   fontWeight: strong ? 'bold' : undefined,
-//   fontSize: size,
-// };
-
-const TextBox = styled.span(({ size, strong, style }) => ({
-  fontSize: size,
-  fontWeight: strong && 'bold',
-  style,
-}));
-
-const Text = ({ children, ...props }) => {
-  // const testStyle = { color: 'red' };
-  // console.log();
-  const [count, setCount] = useState(0);
-  const handleClick = (e) => {
-    e.preventDefault();
-    setCount(count + 1);
-    // console.log(e.target);
+const Text = ({
+  children,
+  block,
+  paragraph,
+  size,
+  strong,
+  underline,
+  deleteline,
+  color,
+  ...props
+}) => {
+  const TextBox = block ? 'div' : paragraph ? 'p' : 'span';
+  const fontStyle = {
+    fontSize: size > 0 && size,
+    fontWeight: strong && 'bold',
+    textDecoration: underline && 'underline',
+    color,
   };
 
+  if (deleteline) {
+    children = <del>{children}</del>;
+  }
+
   return (
-    <TextBox
-      // style={{ ...testStyle }}
-      value={count}
-      onClick={handleClick}
-      {...props}
-    >
+    <TextBox style={{ ...props.style, ...fontStyle }} {...props}>
       {children}
-      {count}
     </TextBox>
   );
 };

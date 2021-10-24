@@ -4,16 +4,21 @@ export default {
   title: 'Component/Text',
   component: Text,
   argTypes: {
+    block: { control: 'boolean' },
+    paragraph: { control: 'boolean' },
     size: { control: 'number' },
     strong: { control: 'boolean' },
     underline: { control: 'boolean' },
     deleteline: { control: 'boolean' },
-    count: { defaultValue: 10 },
-    // style: { defaultValue: { color: 'red' } },
+    color: { control: 'color' },
   },
 };
 
 export const Default = (args) => {
-  // const testStyle = { color: 'red' };
-  return <Text>Text</Text>;
+  return (
+    <>
+      <Text {...args}>Text1</Text>
+      <Text {...args}>Text2</Text>
+    </>
+  );
 };
