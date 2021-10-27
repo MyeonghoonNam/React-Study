@@ -5,6 +5,8 @@ import { css } from '@emotion/react';
 import Box from './components/Box';
 import { loginApi } from './utils/API/login';
 import { authApi } from './utils/API/auth';
+import CheckBox from './components/CheckBox';
+import { useState } from 'react';
 
 const style = css`
   color: hotpink;
@@ -35,8 +37,15 @@ function App() {
     console.log(auth);
   };
 
+  const [checked, setChecked] = useState(true);
+
+  const handleClick2 = () => {
+    setChecked(!checked);
+  };
   return (
     <div className="App">
+      <CheckBox onClick={handleClick2} checked={checked} />
+      {/* <CheckBox onClick={handleClick} checked={checked} /> */}
       <SomeComponent />
       <Box />
       <header className="App-header">
