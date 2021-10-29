@@ -11,3 +11,5 @@ export { default as Upload } from './base/Upload';
 export { default as Paragraph } from './base/Paragraph';
 export { default as ArticleButton } from './base/ArticleButton';
 export { default as Input } from './base/Input';
+export { default as ColorBox } from './domain/ColorBox';
+export { default as SelectColors } from './domain/SelectColor';
