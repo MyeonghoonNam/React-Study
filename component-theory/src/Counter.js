@@ -32,9 +32,20 @@ class Counter extends Component {
 
             // 위 코드와 아래 코드는 완전히 똑같은 기능
             // 아래 코드는 함수에서 바로 객체를 반환
-            this.setState((prevState) => ({
-              number: prevState.number + 1,
-            }));
+            // this.setState((prevState) => ({
+            //   number: prevState.number + 1,
+            // }));
+
+            // setState를 사용하여 값을 업데이트하고 난 다음에 특정 작업을 하고 싶을 때는 setState의 두 번째 파라미터로 콜백(callback) 함수를 등록하여 작업을 처리
+            this.setState(
+              {
+                number: number + 1,
+              },
+              () => {
+                console.log('setState 호출 후...');
+                console.log(this.state); // 이전 상태에서 1이 더해진 상태값 출력
+              },
+            );
           }}
         >
           +1
