@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 
 class EventPractice extends Component {
   state = {
+    name: '',
     message: '',
   };
 
   handleChange = (e) => {
     this.setState({
-      message: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
   handleClick = () => {
-    alert(this.state.message);
+    alert(this.state.name + ' : ' + this.state.message);
 
     this.setState({
+      name: '',
       message: '',
     });
   };
@@ -25,8 +27,15 @@ class EventPractice extends Component {
         <h1>이벤트 연습</h1>
         <input
           type="text"
+          name="name"
+          placeholder="name..."
+          value={this.state.name}
+          onChange={this.handleChange}
+        />
+        <input
+          type="text"
           name="message"
-          placeholder="input..."
+          placeholder="message..."
           value={this.state.message}
           onChange={this.handleChange}
         />
