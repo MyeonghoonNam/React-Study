@@ -21,10 +21,10 @@ const TodoListItemContainer = styled.div`
 `;
 
 const CheckBox = styled.div`
-  cursor: pointer;
-  flex: 1; // 차지할 수 있는 영역 모두 차지
   display: flex;
   align-items: center; // 세로 중앙 정렬
+  flex: 1; // 차지할 수 있는 영역 모두 차지
+  cursor: pointer;
 
   svg {
     // 아이콘
@@ -36,14 +36,14 @@ const CheckBox = styled.div`
       color: #22b8cf;
     }
 
-    div {
+    span {
       color: #adb5bd;
       text-decoration: line-through;
     }
   }
 `;
 
-const Text = styled.div`
+const Text = styled.span`
   margin-left: 0.5rem;
   flex: 1; // 차지할 수 있는 영역 모두 차지
 `;
@@ -60,12 +60,14 @@ const TodoListItemRemoveButton = styled.div`
   }
 `;
 
-const TodoListItem = () => {
+const TodoListItem = ({ todo }) => {
+  const { text, checked } = todo;
+
   return (
     <TodoListItemContainer>
-      <CheckBox>
-        <MdCheckBoxOutlineBlank />
-        <Text>To do</Text>
+      <CheckBox className={checked && 'checked'}>
+        {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
+        <Text>{text}</Text>
       </CheckBox>
       <TodoListItemRemoveButton>
         <MdRemoveCircleOutline />
