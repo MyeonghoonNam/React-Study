@@ -60,20 +60,16 @@ const TodoListItemRemoveButton = styled.div`
   }
 `;
 
-const TodoListItem = ({ todo, onRemove }) => {
+const TodoListItem = ({ todo, onRemove, onToggle }) => {
   const { id, text, checked } = todo;
-
-  const onClick = () => {
-    onRemove(id);
-  };
 
   return (
     <TodoListItemContainer>
-      <CheckBox className={checked && 'checked'}>
+      <CheckBox className={checked && 'checked'} onClick={() => onToggle(id)}>
         {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
         <Text>{text}</Text>
       </CheckBox>
-      <TodoListItemRemoveButton onClick={onClick}>
+      <TodoListItemRemoveButton onClick={() => onRemove(id)}>
         <MdRemoveCircleOutline />
       </TodoListItemRemoveButton>
     </TodoListItemContainer>
