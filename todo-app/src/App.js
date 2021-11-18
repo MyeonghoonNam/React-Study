@@ -3,24 +3,23 @@ import TodoInsert from './components/TodoInsert';
 import TodoTemplate from './components/TodoTemplate';
 import TodoList from './components/TodoList';
 
-const App = () => {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: '리엑트 공부하기',
-      checked: true,
-    },
-    {
-      id: 2,
-      text: '타입스크립트 공부하기',
-      checked: true,
-    },
-    {
-      id: 3,
-      text: '자바스크립트 공부하기',
+// 지연을 발생시키는 함수
+const createBulkTodos = () => {
+  const array = [];
+
+  for (let i = 1; i <= 2500; i++) {
+    array.push({
+      id: i,
+      text: `할 일 ${i}`,
       checked: false,
-    },
-  ]);
+    });
+  }
+
+  return array;
+};
+
+const App = () => {
+  const [todos, setTodos] = useState(createBulkTodos);
 
   // 고윳값으로 사용될 id
   // ref를 사용하여 변수 담기
