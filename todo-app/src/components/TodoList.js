@@ -1,3 +1,4 @@
+import React from 'react';
 import TodoListItem from './TodoListItem';
 import styled from '@emotion/styled';
 
@@ -22,4 +23,4 @@ const TodoList = ({ todos, onRemove, onToggle }) => {
   );
 };
 
-export default TodoList;
+export default React.memo(TodoList);
