@@ -7,11 +7,11 @@ const TodoListContainer = styled.div`
   overflow-y: auto;
 `;
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, onRemove }) => {
   return (
     <TodoListContainer>
       {todos.map((todo) => (
-        <TodoListItem key={todo.id} todo={todo} />
+        <TodoListItem key={todo.id} todo={todo} onRemove={onRemove} />
       ))}
     </TodoListContainer>
   );
