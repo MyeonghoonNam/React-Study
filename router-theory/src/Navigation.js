@@ -12,10 +12,7 @@ const Navigation = () => {
           <Link to="/about">소개</Link>
         </li>
         <li>
-          <Link to="/profile/hoon">프로필 : 훈</Link>
-        </li>
-        <li>
-          <Link to="/profile/myeong">프로필 : 명</Link>
+          <Link to="/profiles">프로필</Link>
         </li>
       </ul>
 
