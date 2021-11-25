@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navigation = () => {
@@ -9,6 +10,12 @@ const Navigation = () => {
         </li>
         <li>
           <Link to="/about">소개</Link>
+        </li>
+        <li>
+          <Link to="/profile/hoon">프로필 : 훈</Link>
+        </li>
+        <li>
+          <Link to="/profile/myeong">프로필 : 명</Link>
         </li>
       </ul>
 
