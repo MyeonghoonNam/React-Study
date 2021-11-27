@@ -1,9 +1,18 @@
+import { css } from '@emotion/react';
 import { NavLink, Outlet } from 'react-router-dom';
 
-const activeStyle = {
-  background: 'black',
-  color: 'white',
-};
+const NavLinkStyle = css`
+  color: black;
+  text-decoration: none;
+
+  &.active {
+    color: red;
+  }
+
+  &:hover {
+    color: hotpink;
+  }
+`;
 
 const Profiles = () => {
   return (
@@ -11,15 +20,12 @@ const Profiles = () => {
       <h3>사용자 목록:</h3>
       <ul>
         <li>
-          <NavLink
-            style={(isActive) => (isActive ? { ...activeStyle } : '')}
-            to="/profiles/hoon"
-          >
+          <NavLink css={NavLinkStyle} to="/profiles/hoon">
             프로필 : 훈
           </NavLink>
         </li>
         <li>
-          <NavLink style={activeStyle} to="/profiles/myeong">
+          <NavLink css={NavLinkStyle} to="/profiles/myeong">
             프로필 : 명
           </NavLink>
         </li>
