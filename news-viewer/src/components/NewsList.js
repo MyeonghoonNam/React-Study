@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from '@emotion/styled';
 import NewsItem from './NewsItem';
 
@@ -15,22 +17,43 @@ const NewsListBlock = styled.div`
   }
 `;
 
-const sampleArticle = {
-  title: '제목',
-  description: '내용',
-  url: 'https://google.com',
-  urlToImage: 'https://via.placeholder.com/160',
-};
-
 const NewsList = () => {
+  const [articles, setArticles] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+
+      try {
+        const { data } = await axios.get(
+          'https://newsapi.org/v2/top-headlines?country=kr&apiKey=7cfafbc6441c457e8a96802f5b096f59',
+        );
+
+        setArticles(data.articles);
+      } catch (e) {
+        console.log(e);
+      }
+
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <NewsListBlock>Loading...</NewsListBlock>;
+  }
+
+  if (!articles) {
+    return null;
+  }
+
   return (
     <NewsListBlock>
-      <NewsItem article={sampleArticle} />
-      <NewsItem article={sampleArticle} />
-      <NewsItem article={sampleArticle} />
-      <NewsItem article={sampleArticle} />
-      <NewsItem article={sampleArticle} />
-      <NewsItem article={sampleArticle} />
+      {articles.map((article) => (
+        <NewsItem key={article.url} article={article} />
+      ))}
     </NewsListBlock>
   );
 };
