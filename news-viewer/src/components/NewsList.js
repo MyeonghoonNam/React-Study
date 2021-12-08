@@ -17,7 +17,7 @@ const NewsListBlock = styled.div`
   }
 `;
 
-const NewsList = () => {
+const NewsList = ({ category }) => {
   const [articles, setArticles] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -26,8 +26,9 @@ const NewsList = () => {
       setLoading(true);
 
       try {
+        const query = category === 'all' ? '' : `&category=${category}`;
         const { data } = await axios.get(
-          'https://newsapi.org/v2/top-headlines?country=kr&apiKey=7cfafbc6441c457e8a96802f5b096f59',
+          `https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=7cfafbc6441c457e8a96802f5b096f59`,
         );
 
         setArticles(data.articles);
@@ -39,7 +40,7 @@ const NewsList = () => {
     };
 
     fetchData();
-  }, []);
+  }, [category]);
 
   if (loading) {
     return <NewsListBlock>Loading...</NewsListBlock>;
