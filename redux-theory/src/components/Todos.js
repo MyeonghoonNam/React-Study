@@ -1,6 +1,13 @@
 import TodoItem from './TodoItems';
 
-const Todos = ({ input, sonChangeInput, onInsert, onToggle, onRemove }) => {
+const Todos = ({
+  input,
+  todos,
+  onChangeInput,
+  onInsert,
+  onToggle,
+  onRemove,
+}) => {
   const onSubmit = (e) => {
     e.preventDefault();
   };
