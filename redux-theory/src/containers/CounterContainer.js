@@ -2,7 +2,7 @@ import Counter from '../components/Counter';
 // import { connect } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { increase, decrease } from '../modules/counter';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 //리덕스 스토어와 연동된 컴포넌트를 컨테이너 컴포넌트라고 한다.
 const CounterContainer = () => {
@@ -46,4 +46,5 @@ const CounterContainer = () => {
 //   },
 // )(CounerContainer);
 
-export default CounterContainer;
+// useSelector를 통한 리덕스 상태 조회시 다음과 같은 최적화 작업을 해야 리렌더링시 최적화가 이루어진다.
+export default React.memo(CounterContainer);

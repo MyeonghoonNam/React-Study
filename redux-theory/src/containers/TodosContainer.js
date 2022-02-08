@@ -1,4 +1,5 @@
 // import { connect } from 'react-redux';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { changeInput, insert, toggle, remove } from '../modules/todos';
 import Todos from '../components/Todos';
@@ -39,4 +40,5 @@ const TodosContainer = () => {
 //   },
 // )(TodosContainer);
 
-export default TodosContainer;
+// useSelector를 통한 리덕스 상태 조회시 다음과 같은 최적화 작업을 해야 리렌더링시 최적화가 이루어진다.
+export default React.memo(TodosContainer);
