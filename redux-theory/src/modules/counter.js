@@ -1,6 +1,6 @@
 // redux-actions를 사용하면 액션 생성 함수를 더 짧은 코드로 작성할 수 있습니다.그리고 리듀서를 작성할 때도 switch/case 문이 아닌 handleActions라는 함수를 사용하여 각 액션마다 업데이트 함수를 설정하는 형식으로 작성해 줄 수 있습니다.
 
-import { createAction, handleAction } from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 
 // 리덕스에서 Ducks 패턴을 사용하여 액션 타입, 액션 생성 함수, 리듀서를 작성한 코드를 모듈이라고 한다.
 
@@ -19,7 +19,7 @@ const initialState = {
 };
 
 // 리듀서 함수
-const counter = handleAction(
+const counter = handleActions(
   {
     [INCREASE]: (state, action) => ({ number: state.number + 1 }),
     [DECREASE]: (state, action) => ({ number: state.number - 1 }),
