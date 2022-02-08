@@ -1,13 +1,22 @@
 import Counter from '../components/Counter';
 // import { connect } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { increase, decrease } from '../modules/counter';
+import { useCallback } from 'react';
 
 //리덕스 스토어와 연동된 컴포넌트를 컨테이너 컴포넌트라고 한다.
-const CounterContainer = ({ increase, decrease }) => {
+const CounterContainer = () => {
+  // const 결과 = useSelector(상태 선택 함수);
   const number = useSelector((state) => state.counter.number);
+  const dispatch = useDispatch();
+  const onIncrease = useCallback(() => {
+    dispatch(increase());
+  }, [dispatch]);
+  const onDecrease = useCallback(() => {
+    dispatch(decrease());
+  }, [dispatch]);
   return (
-    <Counter number={number} onIncrease={increase} onDecrease={decrease} />
+    <Counter number={number} onIncrease={onIncrease} onDecrease={onDecrease} />
   );
 };
 
