@@ -6,11 +6,9 @@ import WebApiAsync from '../components/WebApiAsync';
 const WebApiAsyncContainer = () => {
   const post = useSelector(({ webApiAsync }) => webApiAsync.post);
   const users = useSelector(({ webApiAsync }) => webApiAsync.users);
-  const loadingPost = useSelector(
-    ({ webApiAsync }) => webApiAsync.loading.GET_POST,
-  );
+  const loadingPost = useSelector(({ loading }) => loading['sample/GET_POST']);
   const loadingUsers = useSelector(
-    ({ webApiAsync }) => webApiAsync.loading.GET_USERS,
+    ({ loading }) => loading['sample/GET_USERS'],
   );
   const dispatch = useDispatch();
 
