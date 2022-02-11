@@ -16,7 +16,7 @@ const WebApiAsyncContainer = () => {
 
   useEffect(() => {
     dispatch(getPost(1));
-    dispatch(getUsers(1));
+    dispatch(getUsers());
   }, [dispatch]);
 
   return (
