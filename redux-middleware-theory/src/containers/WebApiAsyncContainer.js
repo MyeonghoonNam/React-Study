@@ -13,8 +13,13 @@ const WebApiAsyncContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPost(1));
-    dispatch(getUsers());
+    try {
+      dispatch(getPost(1));
+      dispatch(getUsers());
+    } catch (e) {
+      // api 요청 실패에 따른 로직을 구현
+      console.log(e);
+    }
   }, [dispatch]);
 
   return (
