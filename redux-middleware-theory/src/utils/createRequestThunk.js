@@ -5,7 +5,6 @@ const createRequestThunk = (type, request) => {
   const FAILURE = `${type}_FAILURE`;
 
   return (params) => async (dispatch) => {
-    dispatch({ type });
     dispatch(startLoading(type));
 
     try {
