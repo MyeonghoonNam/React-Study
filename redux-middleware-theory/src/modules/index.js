@@ -11,7 +11,7 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import counter, { counterSaga } from './counter';
-import webApiAsync from './webApiAsync';
+import webApiAsync, { webApiAsyncSaga } from './webApiAsync';
 import loading from './loading';
 
 const rootReducer = combineReducers({
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
 
 export function* rootSaga() {
   // all 함수는 여러 사가를 합쳐 주는 역할
-  yield all([counterSaga()]);
+  yield all([counterSaga(), webApiAsyncSaga()]);
 }
 
 export default rootReducer;
