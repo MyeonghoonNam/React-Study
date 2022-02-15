@@ -11,12 +11,12 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 import counter, { counterSaga } from './counter';
-import sample from './sample';
+import webApiAsync from './webApiAsync';
 import loading from './loading';
 
 const rootReducer = combineReducers({
   counter,
-  sample,
+  webApiAsync,
   loading,
 });
 
