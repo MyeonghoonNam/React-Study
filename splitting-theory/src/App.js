@@ -23,14 +23,17 @@
 // export default App;
 
 // -------------------------------------------------------------------
-// React.lazy와 Suspense를 통한 코드 스플리팅
+// React.lazy와 Suspense, Loadable Components를 통한 코드 스플리팅
 
-import React, { useState, Suspense } from 'react';
+import React, { useState } from 'react';
+import loadable from '@loadable/component';
 import logo from './logo.svg';
 import './App.css';
 
 // React.lazy는 컴포넌트를 렌더링하는 시점에서 비동기적으로 로딩할 수 있게 해 주는 유틸 함수
-const Split = React.lazy(() => import('./splitCode'));
+const Split = loadable(() => import('./splitCode'), {
+  fallback: <div>loading...</div>,
+});
 
 const App = () => {
   const [visible, setVisible] = useState(false);
@@ -40,14 +43,19 @@ const App = () => {
 
   // Suspense는 리액트 내장 컴포넌트로서 코드 스플리팅된 컴포넌트를 로딩하도록 발동시킬 수 있고, 로딩이 끝나지 않았을 때 보여 줄 UI를 설정할 수 있다.
   // fallback	props를 통해 로딩 중에 보여 줄 JSX를 지정
+
+  // Loadable Components는 코드 스플리팅을 편하게 하도록 도와주는 서드파티 라이브러리이다.
+  // 이 라이브러리는 서버 사이드 렌더링을 지원힌디(React.lazy와 Suspense는 아직 서버 사이드 렌더링을 지원하지 않는다). 또한, 렌더링하기 전에 필요할 때 스플리팅된 파일을 미리 불러올 수 있는 기능도 있다.
+  // 서버 사이드 렌더링은 웹 서비스의 초기 로딩 속도 개선, 캐싱 및 검색 엔진 최적화를 가능하게 해 주는 기술
+  // 서버 사이드 렌더링을 사용하면 웹 서비스의 초기 렌더링을 사용자의 브라우저가 아닌 서버 쪽에서 처리
+  // 사용자는 서버에서 렌더링한 html 결과물을 받아 와서 그대로 사용하기 때문에 초기 로딩 속도도 개선, 검색 엔진에서 크롤링할 때 유리한 이점이 있다.
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p onClick={onClick}>Hello React!</p>
-        <Suspense fallback={<div>loading...</div>}>
-          {visible && <Split />}
-        </Suspense>
+        {visible && <Split />}
       </header>
     </div>
   );
