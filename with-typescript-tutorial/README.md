@@ -1,46 +1,174 @@
-# Getting Started with Create React App
+# Description
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CreateReactApp + Typescript + ESLint + Prettier의 초기 환경 셋업 과정
 
-## Available Scripts
+## 1. CreateReactApp + Typescript
 
-In the project directory, you can run:
+```
+$npx create-react-app "프로젝트명" —template typescript
+```
 
-### `npm start`
+설치된 프로젝트에서 불필요한 파일들을 제거한다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 2. tsconfig.json Update
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "baseUrl": "./src", // 이 코드를 추가하여 경로명 문제 간소화
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"]
+}
+```
 
-### `npm test`
+## 3. ESLint
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### step 1) VScode extension에서 eslint 설치 <br/>
 
-### `npm run build`
+### step 2) default config 제거
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+// package.json에서 아래 코드 제거
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+"eslintConfig": {
+   "extends": [
+     "react-app",
+     "react-app/jest"
+   ]
+ },
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### step 3) install ESLint & SetUp
 
-### `npm run eject`
+```
+$npm install -D eslint // 설치
+$npx eslint --init // 설정
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+// .eslintrc.json 파일 설정
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"plugin:react/recommended",
+		"airbnb",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:prettier/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	},
+	"plugins": ["react", "react-hooks", "@typescript-eslint"],
+	"rules": {
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"prettier/prettier": "error",
+		"react/jsx-filename-extension": [
+			2,
+			{ "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+		],
+		"import/extensions": [
+			2,
+			"ignorePackages",
+			{
+				"js": "never",
+				"jsx": "never",
+				"ts": "never",
+				"tsx": "never"
+			}
+		]
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".js", ".jsx", ".ts", ".tsx"],
+				"moduleDirectory": ["node_modules", "@types"]
+			},
+			"typescript": {}
+		}
+	}
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 4. Prettier
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### step 1) VScode extension에서 prettier 설치 <br/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### step 2) prettier install
 
-## Learn More
+```
+npm i -D prettier
+npm i -D eslint-config-prettier eslint-plugin-prettier
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### step 3) prettier setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+// .eslintrc.json 파일 수정
+// extends와 rules에 prettier 추가
+extends: [
+  'plugin:react/recommended',
+  'airbnb',
+  'plugin:prettier/recommended', // 순서가 중요함 가장 뒤에
+],
+rules: {
+  'prettier/prettier': 'error',
+  ...
+},
+```
+
+```
+// .prettierrc.json 파일 생성 및 수정
+{
+	"singleQuote": true,
+	"semi": true,
+	"useTabs": true,
+	"tabWidth": 2,
+	"printWidth": 80,
+	"arrowParens": "always"
+}
+```
+
+## 5. VScode setup
+
+```
+// settings.json에 아래 코드 추가
+{
+  ...
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascriptreact]":{ "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" }
+
+ ...
+}
+```
