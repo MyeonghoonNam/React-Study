@@ -1,7 +1,16 @@
-import React from 'react';
+import { Comment } from './components/index';
 
-function App() {
-	return <div className="App">Init</div>;
-}
+const App = () => {
+	return (
+		<Comment
+			date={new Date()}
+			text="I hope you enjoy learning React!"
+			author={{
+				name: 'Kitty',
+				avatarUrl: 'http://placekitten.com/g/64/64',
+			}}
+		/>
+	);
+};
 
 export default App;
