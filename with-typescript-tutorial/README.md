@@ -2,10 +2,16 @@
 
 CreateReactApp + Typescript + ESLint + Prettier의 초기 환경 셋업 과정
 
-## 1. CreateReactApp + Typescript
+## 1. Library Install
 
 ```
 $npx create-react-app "프로젝트명" --template typescript
+
+$npm i -D eslint prettier
+$npm i -D eslint-config-prettier eslint-plugin-prettier
+$npm i -D @typescript-eslint/eslint-plugin @typescript-eslint/parser
+
+$npx install-peerdeps --dev eslint-config-airbnb
 ```
 
 설치된 프로젝트에서 불필요한 파일들을 제거한다.
@@ -14,26 +20,32 @@ $npx create-react-app "프로젝트명" --template typescript
 
 ```
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "baseUrl": "./src", // 이 코드를 추가하여 경로명 문제 간소화
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": ["src"]
+	"compilerOptions": {
+		"allowJs": true,
+		"target": "ES5",
+		"module": "ES2015",
+		"skipLibCheck": true,
+		"outDir": "dist",
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"noFallthroughCasesInSwitch": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+		"moduleResolution": "Node",
+		"lib": ["ES2015", "DOM", "DOM.Iterable"],
+		"noImplicitAny": true,
+		"strict": true,
+		"strictNullChecks": true,
+		"alwaysStrict": true,
+		"strictFunctionTypes": true
+	},
+	"include": ["src/**/*.tsx"],
+	"exclude": ["node_modules", "**/*.spec.tsx"]
 }
+
 ```
 
 ## 3. ESLint
@@ -53,13 +65,7 @@ $npx create-react-app "프로젝트명" --template typescript
  },
 ```
 
-### step 3) install ESLint & SetUp
-
-```
-$npm install -D eslint // 설치
-$npx eslint --init // 설정
-```
-
+### step 3) Eslint SetUp
 ```
 // .eslintrc.json 파일 설정
 {
@@ -67,12 +73,6 @@ $npx eslint --init // 설정
 		"browser": true,
 		"es2021": true
 	},
-	"extends": [
-		"plugin:react/recommended",
-		"airbnb",
-		"plugin:@typescript-eslint/recommended",
-		"plugin:prettier/recommended"
-	],
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
 		"ecmaFeatures": {
@@ -81,76 +81,60 @@ $npx eslint --init // 설정
 		"ecmaVersion": "latest",
 		"sourceType": "module"
 	},
-	"plugins": ["react", "react-hooks", "@typescript-eslint"],
+	"plugins": ["@typescript-eslint", "react-hooks"],
+	"extends": [
+		"airbnb",
+		"plugin:react/recommended",
+		"plugin:jsx-a11y/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:prettier/recommended"
+	],
 	"rules": {
-		"react-hooks/rules-of-hooks": "error",
-		"react-hooks/exhaustive-deps": "warn",
-		"@typescript-eslint/explicit-function-return-type": "off",
-		"prettier/prettier": "error",
-		"react/jsx-filename-extension": [
-			2,
-			{ "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-		],
+		"prettier/prettier": ["error", { "endOfLine": "auto" }],
+		"react/react-in-jsx-scope": "off",
+		"react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
 		"import/extensions": [
-			2,
+			"error",
 			"ignorePackages",
 			{
-				"js": "never",
-				"jsx": "never",
 				"ts": "never",
 				"tsx": "never"
 			}
-		]
+		],
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn"
 	},
 	"settings": {
 		"import/resolver": {
 			"node": {
-				"extensions": [".js", ".jsx", ".ts", ".tsx"],
-				"moduleDirectory": ["node_modules", "@types"]
-			},
-			"typescript": {}
+				"extensions": [".js", ".jsx", ".ts", ".tsx"]
+			}
 		}
 	}
 }
+
+
 ```
 
 ## 4. Prettier
 
 ### step 1) VScode extension에서 prettier 설치 <br/>
 
-### step 2) prettier install
-
-```
-npm i -D prettier
-npm i -D eslint-config-prettier eslint-plugin-prettier
-```
-
-### step 3) prettier setup
-
-```
-// .eslintrc.json 파일 수정
-// extends와 rules에 prettier 추가
-extends: [
-  'plugin:react/recommended',
-  'airbnb',
-  'plugin:prettier/recommended', // 순서가 중요함 가장 뒤에
-],
-rules: {
-  'prettier/prettier': 'error',
-  ...
-},
-```
+### step 2) Prettier Setup
 
 ```
 // .prettierrc.json 파일 생성 및 수정
 {
-	"singleQuote": true,
-	"semi": true,
-	"useTabs": true,
-	"tabWidth": 2,
-	"printWidth": 80,
-	"arrowParens": "always"
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": true,
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "arrowParens": "always"
 }
+
 ```
 
 ## 5. VScode setup
@@ -160,14 +144,19 @@ rules: {
 {
   ...
 
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "editor.formatOnSave": true,
-  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[javascriptreact]":{ "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
-  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" }
+  "eslint.alwaysShowStatus": true,
+  "eslint.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
 
  ...
 }
