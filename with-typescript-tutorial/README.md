@@ -5,7 +5,7 @@ CreateReactApp + Typescript + ESLint + Prettier의 초기 환경 셋업 과정
 ## 1. CreateReactApp + Typescript
 
 ```
-$npx create-react-app "프로젝트명" —template typescript
+$npx create-react-app "프로젝트명" --template typescript
 ```
 
 설치된 프로젝트에서 불필요한 파일들을 제거한다.
