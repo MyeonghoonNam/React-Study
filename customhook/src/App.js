@@ -1,5 +1,6 @@
 import Box from './components/Box';
 import CheckBox from './components/CheckBox';
+import Dropdown from './components/Dropdown';
 import useToggle from './hooks/useToggle';
 import useHover from './hooks/useHover';
 import useKeyPress from './hooks/useKeyPress';
@@ -17,6 +18,8 @@ function App() {
       {isHover ? 'hover' : 'mouseOut'}
       <Box ref={ref} />
       {keyPressed && 'Pressed'}
+
+      <Dropdown />
     </div>
   );
 }
