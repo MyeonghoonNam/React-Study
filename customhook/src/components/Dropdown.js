@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useRef, useState } from 'react';
-import useOutsidClick from '../hooks/useOutsideClick';
+import useOutsideClick from '../hooks/useOutsideClick';
 
 const Container = styled.div`
   width: 200px;
@@ -27,7 +27,7 @@ const Dropdown = () => {
   const ref = useRef(null);
   const [open, setOpen] = useState(false);
 
-  useOutsidClick(ref, () => {
+  useOutsideClick(ref, () => {
     setOpen(() => false);
   });
 

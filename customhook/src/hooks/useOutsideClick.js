@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useOutsidClick = (ref, handler) => {
+const useOutsideClick = (ref, handler) => {
   useEffect(() => {
     const listener = (e) => {
       if (!ref.current || ref.current.contains(e.target)) {
@@ -18,4 +18,4 @@ const useOutsidClick = (ref, handler) => {
   }, [ref, handler]);
 };
 
-export default useOutsidClick;
+export default useOutsideClick;
