@@ -1,6 +1,8 @@
 import { useUserList } from '../../hooks';
 
-const UserList = () => {
+import type { Props } from './types';
+
+const UserList = ({ onClick }: Props) => {
   const userList = useUserList();
 
   return (
@@ -9,7 +11,13 @@ const UserList = () => {
       <ul>
         {userList.map((user) => (
           <li key={user.id}>
-            <span style={{ cursor: 'pointer' }}>{user.name}</span>
+            <span
+              data-userid={user.id}
+              onClick={onClick}
+              style={{ cursor: 'pointer' }}
+            >
+              {user.name}
+            </span>
           </li>
         ))}
       </ul>

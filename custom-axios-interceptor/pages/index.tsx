@@ -1,7 +1,18 @@
 import Head from 'next/head';
-import UserList from '../components/UserList';
+import { useCallback, useState, MouseEvent } from 'react';
+import { UserList, User } from '../components';
 
 export default function Home() {
+  const [userId, setUserId] = useState<number>();
+
+  const handleClick = useCallback(async (e: MouseEvent) => {
+    if (e.target instanceof HTMLElement) {
+      const userId = e.target.dataset['userid'];
+
+      userId && setUserId(Number(userId));
+    }
+  }, []);
+
   return (
     <>
       <Head>
@@ -12,7 +23,8 @@ export default function Home() {
 
       <main>
         <h1>Axios Interceptor Customizing</h1>
-        <UserList />
+        <UserList onClick={handleClick} />
+        {userId && <User userId={userId} />}
       </main>
     </>
   );
