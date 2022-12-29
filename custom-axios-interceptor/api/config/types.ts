@@ -26,7 +26,5 @@ export interface Instance extends AxiosInstance {
 
 export interface ApiError {
   status: number;
-  errorCode: string;
-  errors: any[];
-  reason: string;
+  message: string;
 }
