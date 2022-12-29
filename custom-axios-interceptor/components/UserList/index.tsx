@@ -3,7 +3,15 @@ import { useUserList } from '../../hooks';
 import type { Props } from './types';
 
 const UserList = ({ onClick }: Props) => {
-  const userList = useUserList();
+  const [userList, isLoading, error] = useUserList();
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <div>
