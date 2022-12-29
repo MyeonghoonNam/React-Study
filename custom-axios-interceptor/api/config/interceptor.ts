@@ -1,4 +1,4 @@
-import { Instance } from './types';
+import { Instance, ApiError } from './types';
 
 const interceptor = (instance: Instance) => {
   instance.interceptors.response.use(
@@ -9,7 +9,7 @@ const interceptor = (instance: Instance) => {
         message: `${response.status} 네트워크 오류가 발생하였습니다.`,
       };
 
-      return Promise.reject(error);
+      return Promise.reject<ApiError>(error);
     },
   );
 };
