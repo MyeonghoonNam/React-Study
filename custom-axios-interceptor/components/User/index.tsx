@@ -2,9 +2,13 @@ import useUser from '../../hooks/useUser';
 import type { Props } from './types';
 
 const User = ({ userId }: Props) => {
-  const user = useUser(userId);
+  const [user, isLoading, error] = useUser(userId);
 
-  if (!user) {
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
+  if (!user || isLoading) {
     return null;
   }
 
