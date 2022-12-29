@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import UserList from '../components/UserList';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
 
       <main>
         <h1>Axios Interceptor Customizing</h1>
+        <UserList />
       </main>
     </>
   );
