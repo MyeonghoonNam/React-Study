@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { UserList } from '@components/index';
 
 export default function Home() {
   return (
@@ -9,7 +10,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main>Init Project</main>
+      <main>
+        <h1>Init Project</h1>
+        <UserList />
+      </main>
     </>
   );
 }
