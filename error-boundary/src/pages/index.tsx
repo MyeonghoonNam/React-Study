@@ -1,7 +1,14 @@
 import Head from 'next/head';
-import { UserList } from '@components/index';
+import { Suspense, useState, useCallback } from 'react';
+import { UserList, Spinner } from '@/components';
 
 export default function Home() {
+  const [toggleUserList, setToggleUserList] = useState(false);
+
+  const handleUserListToggle = useCallback(() => {
+    setToggleUserList((prev) => !prev);
+  }, []);
+
   return (
     <>
       <Head>
@@ -12,7 +19,18 @@ export default function Home() {
 
       <main>
         <h1>Init Project</h1>
-        <UserList />
+
+        <button type="button" onClick={handleUserListToggle}>
+          getUserList
+        </button>
+
+        <hr />
+
+        {toggleUserList && (
+          <Suspense fallback={<Spinner />}>
+            <UserList />
+          </Suspense>
+        )}
       </main>
     </>
   );

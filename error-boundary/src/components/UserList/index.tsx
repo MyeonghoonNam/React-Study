@@ -1,21 +1,22 @@
-import useUserList from '@queries/useUserList';
 import styled from 'styled-components';
+import { useUserList } from '@/queries';
 
 const UserList = () => {
-  const { data } = useUserList();
+  const { data: users } = useUserList();
 
-  return (
+  return users ? (
     <Container>
       <h2>UserList</h2>
+
       <ul>
-        {data?.map(({ id, name }) => (
+        {users?.map(({ id, name }) => (
           <li key={id}>
             <span>{name}</span>
           </li>
         ))}
       </ul>
     </Container>
-  );
+  ) : null;
 };
 
 const Container = styled.article`
