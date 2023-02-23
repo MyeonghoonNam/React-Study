@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { Suspense, useState, useCallback } from 'react';
 import { UserList, Spinner } from '@/components';
+import { ErrorBoundary } from 'react-error-boundary';
 
 export default function Home() {
   const [toggleUserList, setToggleUserList] = useState(false);
@@ -24,12 +25,12 @@ export default function Home() {
           getUserList
         </button>
 
-        <hr />
-
         {toggleUserList && (
-          <Suspense fallback={<Spinner />}>
-            <UserList />
-          </Suspense>
+          <ErrorBoundary FallbackComponent={UserList.Fallback}>
+            <Suspense fallback={<Spinner />}>
+              <UserList />
+            </Suspense>
+          </ErrorBoundary>
         )}
       </main>
     </>

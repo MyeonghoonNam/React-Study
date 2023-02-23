@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import UserListFallback from './fallback';
 import { useUserList } from '@/queries';
 
 const UserList = () => {
@@ -24,5 +25,7 @@ const Container = styled.article`
     cursor: pointer;
   }
 `;
+
+UserList.Fallback = UserListFallback;
 
 export default UserList;
