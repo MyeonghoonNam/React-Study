@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { FaSpinner } from 'react-icons/fa';
 
 const Spinner = () => {
-  console.log('Spinner');
   return (
     <Container>
       <FaSpinner />
